@@ -1,0 +1,14 @@
+File reader 1: http://www.mkyong.com/java/how-to-read-file-from-java-bufferedreader-example/
+File reader 2: http://stackoverflow.com/questions/4898263/multiple-delimiters-in-scanner-class
+
+Converter to base 6: http://stackoverflow.com/questions/16008685/base-10-to-base-2-8-16-conversion-in-java
+
+Order the list 1: http://stackoverflow.com/questions/10706721/convert-liststring-to-listinteger-directly
+Order the list 1: http://stackoverflow.com/questions/18524/java-best-way-of-converting-listinteger-to-liststring
+
+Time Counter 1: http://stackoverflow.com/questions/180158/how-do-i-time-a-methods-execution-in-java
+Time Counter 2: https://stackoverflow.com/questions/625433/how-to-convert-milliseconds-to-x-mins-x-seconds-in-java/625624#625624
+
+CharAt Fonte: http://www.tutorialspoint.com/java/java_string_charat.htm
+
+PseudoCódigo: https://infoanalucia.wordpress.com/sobre/tipos-de-algoritmos/
