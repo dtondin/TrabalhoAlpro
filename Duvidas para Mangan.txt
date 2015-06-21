@@ -28,3 +28,7 @@
 8- !! A comparação dos caracteres é feita com a mesma posição dos comparados. Exemplo: 123 132 (True pq o digito que troca esta na posição zero) / 123 231 (False pois as posições de mudança dos digitos nao é a mesma). POREM (no exemplo True) devo verificar meu proximo numero a casar com baseado no numero anterior e não no primeiro numero.
 
 9- !! A sequencia se baseia no proximo digito que casa. Exemplo: 325 825 829 <- este caso fecha [casa] uma sequencia certa pq apenas 1 numero se modifica quando comparado 325 com 825 [apenas 3 e 8 mudam], já 825 e 829 apenas 5 e 9 mudam e por apenas um digito (na mesma posição) mudar, eles são aceitaveis.
+
+10- !! Exemplo para comparacao: [325 825 829]. Comparador da vez: 325. Quando dois numeros fazem um match (325 e 829), eh necessario partir do segundo numero do match (829) a procura de novos matchs, sendo o numero 829 o proximo comparador valido.
+
+11- !! Exemplo para comparacao: [325 825 829]. Comparador da vez: 325. Quando a procura e formacao da sequencia esta completa, deve-se iniciar uma nova procura por matchs, partindo do numero comparador + 1 a procura de novos matchs.

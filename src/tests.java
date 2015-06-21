@@ -75,7 +75,18 @@ public class tests {
 		assertEquals(2, actuals);
 	}
 	
-	
+	@Test
+	public void testAtualizaVariaveis() {
+		boolean deuMatch = true;
+		//boolean naoDeuMatch = false;
+		util.atualizaVariaveis(deuMatch);
+		ArrayList<String> sequenciaAtual = new ArrayList<>();
+		maiorSequencia.add("123");
+		maiorSequencia.add("124");
+		atualizaMaiorSequenca(sequenciaAtual);
+		int actuals = maiorSequencia.size();
+		assertEquals(2, actuals);
+	}
 	
 
 

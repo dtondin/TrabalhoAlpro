@@ -186,7 +186,7 @@ public class Util {
 		sequenciaAtual.clear();
 	}
 
-	private void atualizaVariaveis(boolean deuMatch) {
+	public void atualizaVariaveis(boolean deuMatch) {
 		if (deuMatch) {
 			F++;
 			N++;
