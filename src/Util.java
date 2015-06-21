@@ -177,13 +177,11 @@ public class Util {
 	}
 
 	public void atualizaMaiorSequenca(ArrayList<String> sequenciaAtual) {
-		int tamanhoSequencia = sequenciaAtual.size();
-		int tamanhoMaiorSequencia = maiorSequencia.size();
-
-		if (tamanhoSequencia != 1) {
-			if (tamanhoSequencia > tamanhoMaiorSequencia) {
-				maiorSequencia = new ArrayList<String>(sequenciaAtual);
-			}
+		int sizeSequenciaAtual = sequenciaAtual.size();
+		int sizeMaiorSequenciaArmazenada = maiorSequencia.size();
+		
+		if (sizeSequenciaAtual > sizeMaiorSequenciaArmazenada) {
+			maiorSequencia = new ArrayList<String>(sequenciaAtual);
 		}		
 		sequenciaAtual.clear();
 	}

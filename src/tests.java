@@ -9,6 +9,7 @@ import org.junit.Test;
 public class tests {
 	
 	Util util = new Util();
+	ArrayList<String> maiorSequencia = new ArrayList<>();
 
 	@Test
 	public void matchTestTrue() {
@@ -34,15 +35,47 @@ public class tests {
 		assertFalse("Tratado corretamente", response_2);
 	}
 	
+	public void atualizaMaiorSequenca(ArrayList<String> sequenciaAtual) {
+		int sizeSequenciaAtual = sequenciaAtual.size();
+		int sizeMaiorSequenciaArmazenada = maiorSequencia.size();
+		
+		if (sizeSequenciaAtual > sizeMaiorSequenciaArmazenada) {
+			maiorSequencia = new ArrayList<String>(sequenciaAtual);
+		}		
+		sequenciaAtual.clear();
+	}
+	
 	@Test
-	public void testMaiorSequencia() {
+	public void testMaiorSequenciaTroca() {
 		ArrayList<String> sequenciaAtual = new ArrayList<>(Arrays.asList("123", "124", "226"));
-		ArrayList<String> maiorSequencia = new ArrayList<>(Arrays.asList("123", "124", "226", "451"));
-		boolean response_1 = util.atualizaMaiorSequenca(sequenciaAtual);
-		assertTrue("Match não feito!", response_1);
-		boolean response_2 = util.match(list.get(1), list.get(2));
-		assertFalse("Tratado corretamente", response_2);
-	}	
+		maiorSequencia.add("123");
+		maiorSequencia.add("124");
+		atualizaMaiorSequenca(sequenciaAtual);
+		int actuals = maiorSequencia.size();
+		assertEquals(3, actuals);
+	}
+	
+	@Test
+	public void testMaiorSequenciaNaoTroca() {
+		ArrayList<String> sequenciaAtual = new ArrayList<>(Arrays.asList("123"));
+		maiorSequencia.add("123");
+		maiorSequencia.add("124");
+		atualizaMaiorSequenca(sequenciaAtual);
+		int actuals = maiorSequencia.size();
+		assertEquals(2, actuals);
+	}
+	
+	@Test
+	public void testMaiorSequenciaNovaVazia() {
+		ArrayList<String> sequenciaAtual = new ArrayList<>();
+		maiorSequencia.add("123");
+		maiorSequencia.add("124");
+		atualizaMaiorSequenca(sequenciaAtual);
+		int actuals = maiorSequencia.size();
+		assertEquals(2, actuals);
+	}
+	
+	
 	
 
 
