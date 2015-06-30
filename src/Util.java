@@ -167,6 +167,7 @@ public class Util {
 				sequenciaAtual.add(next);
 			}else{
 				atualizaMaiorSequenca(sequenciaAtual);
+				//TODO: #1 CADERNO##################################################
 				sequenciaAtual.add(first);
 			}
 			

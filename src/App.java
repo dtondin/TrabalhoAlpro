@@ -19,7 +19,7 @@ public class App {
 		long startTime = System.currentTimeMillis();	
 		
 		// Read the elements list
-		u.readAndConvert(listFileElements, listConvertedElements, "teste0400b");
+		u.readAndConvert(listFileElements, listConvertedElements, "arquivoExemploTrabalho");
 		
 		listConvertedElements = new ArrayList<String>(u.getStringArrayList());
 		
