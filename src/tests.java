@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,9 +35,9 @@ public class tests {
 //		assertFalse("Tratado corretamente", response_2);
 //	}
 	
-	public void atualizaMaiorSequenca(ArrayList<String> sequenciaAtual) {
-		int sizeSequenciaAtual = sequenciaAtual.size();
-		int sizeMaiorSequenciaArmazenada = maiorSequencia.size();
+	public void atualizaMaiorSequenca(final ArrayList<String> sequenciaAtual) {
+		final int sizeSequenciaAtual = sequenciaAtual.size();
+		final int sizeMaiorSequenciaArmazenada = maiorSequencia.size();
 		
 		if (sizeSequenciaAtual > sizeMaiorSequenciaArmazenada) {
 			maiorSequencia = new ArrayList<String>(sequenciaAtual);
@@ -47,31 +47,31 @@ public class tests {
 	
 	@Test
 	public void testMaiorSequenciaTroca() {
-		ArrayList<String> sequenciaAtual = new ArrayList<>(Arrays.asList("123", "124", "226"));
+		final ArrayList<String> sequenciaAtual = new ArrayList<>(Arrays.asList("123", "124", "226"));
 		maiorSequencia.add("123");
 		maiorSequencia.add("124");
 		atualizaMaiorSequenca(sequenciaAtual);
-		int actuals = maiorSequencia.size();
+		final int actuals = maiorSequencia.size();
 		assertEquals(3, actuals);
 	}
 	
 	@Test
 	public void testMaiorSequenciaNaoTroca() {
-		ArrayList<String> sequenciaAtual = new ArrayList<>(Arrays.asList("123"));
+		final ArrayList<String> sequenciaAtual = new ArrayList<>(Arrays.asList("123"));
 		maiorSequencia.add("123");
 		maiorSequencia.add("124");
 		atualizaMaiorSequenca(sequenciaAtual);
-		int actuals = maiorSequencia.size();
+		final int actuals = maiorSequencia.size();
 		assertEquals(2, actuals);
 	}
 	
 	@Test
 	public void testMaiorSequenciaNovaVazia() {
-		ArrayList<String> sequenciaAtual = new ArrayList<>();
+		final ArrayList<String> sequenciaAtual = new ArrayList<>();
 		maiorSequencia.add("123");
 		maiorSequencia.add("124");
 		atualizaMaiorSequenca(sequenciaAtual);
-		int actuals = maiorSequencia.size();
+		final int actuals = maiorSequencia.size();
 		assertEquals(2, actuals);
 	}
 	
