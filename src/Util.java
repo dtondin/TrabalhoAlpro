@@ -9,6 +9,12 @@ import java.util.concurrent.TimeUnit;
 public class Util
 {
 
+    final ArrayList<String> size02 = new ArrayList<>();
+    final ArrayList<String> size03 = new ArrayList<>();
+    final ArrayList<String> size04 = new ArrayList<>();
+    final ArrayList<String> size05 = new ArrayList<>();
+    final ArrayList<String> size06 = new ArrayList<>();
+
     // Variaveis para infraestrutura do applicativo
     private final ArrayList<Integer> intArrayList = new ArrayList<Integer>();
     private final ArrayList<String> stringArrayList = new ArrayList<String>();
@@ -60,9 +66,6 @@ public class Util
 
     /**
      * Convert a String ArrayList to a Integer ArrayList
-     * 
-     * @param strList
-     * @return
      */
     public void convertToInt(final ArrayList<String> strList)
     {
@@ -74,9 +77,6 @@ public class Util
 
     /**
      * Convert a Integer ArrayList to a String ArrayList
-     * 
-     * @param strList
-     * @return
      */
     public void convertToString(final ArrayList<Integer> intList)
     {
@@ -145,6 +145,9 @@ public class Util
 
         // Convert the Integer list to a String list.
         convertToString(intArrayList);
+
+        separarTamanhoStrings(stringArrayList);
+
     }
 
     /**
@@ -165,10 +168,10 @@ public class Util
         {
             first = convertedElementsList.get(F);
             next = convertedElementsList.get(N);
-            if (first.equals("30332"))
-            {
-                System.out.print("A");
-            }
+            //if (first.equals("30332"))
+            //{
+            //    System.out.print("A");
+            //}
 
             sinal = match();
             // Se vermelho, troca F e N uma posição adiante.
@@ -246,12 +249,51 @@ public class Util
     }
 
     /**
+     * @param intArrayList
+     */
+    private void separarTamanhoStrings(final ArrayList<String> list)
+    {
+        String valor = null;
+        int valorSize = 0;
+
+        for (int i = 0; i < list.size(); i++)
+        {
+            valor = list.get(i);
+            valorSize = valor.length();
+            if (valorSize == 2)
+            {
+                size02.add(list.get(i));
+            }
+            if (valorSize == 3)
+            {
+                size03.add(list.get(i));
+            }
+            if (valorSize == 4)
+            {
+                size04.add(list.get(i));
+            }
+            if (valorSize == 5)
+            {
+                size05.add(list.get(i));
+            }
+            if (valorSize == 6)
+            {
+                size06.add(list.get(i));
+            }
+        }
+    }
+
+    /**
      * Compara dois numeros e retorna True se entre eles haver apenas 1 caracter diferente na mesma posição.
      * 
      * @return (boolean) resultado to match.
      */
     public String match()
     {
+
+        // TODO: Ainda necessario encontrar forma de separar tamanhos de
+        // elementos para poder testar de forma correta.
+
         // Vou retornar sinais.
         // Vermelho: Quando size diferente.
         // Amarelo: quando size igual, mas não deu match. Elemento travado
