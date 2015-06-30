@@ -7,6 +7,7 @@ public class App
     static Util u = new Util();
     private static ArrayList<Integer> listFileElements = new ArrayList<>();
     private static ArrayList<String> listConvertedElements = new ArrayList<String>();
+    private static ArrayList<ArrayList<String>> listTodosArray;
 
     static ArrayList<ArrayList> list = new ArrayList<ArrayList>();
 
@@ -17,11 +18,15 @@ public class App
         System.currentTimeMillis();
 
         // Read the elements list
-        u.readAndConvert(listFileElements, listConvertedElements, "teste0400b");
+        u.readAndConvert(listFileElements, listConvertedElements, "teste1000b");
 
-        listConvertedElements = new ArrayList<String>(u.getStringArrayList());
+        //listConvertedElements = new ArrayList<String>(u.getStringArrayList());
 
-        list.add(u.runTel_Dor(listConvertedElements));
+        //list.add(u.runTel_Dor(listConvertedElements));
+        
+        listTodosArray = new ArrayList<ArrayList<String>>(u.getTodosArray());
+        
+        list.add(u.run(listTodosArray));
 
         // Verifies list elements
         //for (int i = 0; i < u.getStringArrayList().size(); i++)
