@@ -15,12 +15,14 @@ public class Util {
 	// Variaveis para solucao do problema proposto
 	private ArrayList<String> sequenciaAtual = new ArrayList<String>();
 	public static ArrayList<String> maiorSequencia = new ArrayList<String>();
-	boolean deuMatch = false;
+	// boolean deuMatch = false;
+	String sinal = null;
 	int F = 0; // like a sentinella for First
 	int N = 1; // like a sentinella for Next
 	String first;
 	String next;
-	int elemSize;
+	int firstSize;
+	int nextSize;
 
 	public Util() {
 	}
@@ -142,69 +144,104 @@ public class Util {
 	public ArrayList<String> runTel_Dor(ArrayList<String> convertedElementsList) {
 		// boolean flag = false;
 		// deuMatch = false;
-		first = convertedElementsList.get(F);
-		next = convertedElementsList.get(N);
-		//int sentinella = F;
+		// first = convertedElementsList.get(F);
+		// next = convertedElementsList.get(N);
+		// int sentinella = F;
 		// TODO: Ainda necessario encontrar forma de separar tamanhos de
 		// elementos para poder testar de forma correta.
-		//elemSize = first.length();
+		// elemSize = first.length();
 		// TODO: correcao: devo contar as sequencias adicionadas. A maior (size)
 		// vai substituir a menor.
 		// TODO: cuidar o caso onde não haverá nenhum match e a lista deverá ser
 		// vazia. Fix para esta linha.
-		
-		
-		//sequenciaAtual.add(first);
 
-		while(N < convertedElementsList.size()) {
+		// sequenciaAtual.add(first);
 
+		int sentinella = F + 1;
+
+		while (N < convertedElementsList.size()
+				&& sentinella < convertedElementsList.size()) {
 			first = convertedElementsList.get(F);
 			next = convertedElementsList.get(N);
-			
-			deuMatch = match(first, next);
 
-			if (deuMatch) {
-				sequenciaAtual.add(next);
-			}else{
+			sinal = match(first, next);
+			// Se vermelho, troca F e N uma posição adiante.
+			// Se amarelo, troca apenas N uma posição adiante.
+			// Se verde, troca variaveis: onde F recebe N. Onde N recebe N+1.
+
+			// atualiza sequencia de acodo com o tamanho e sinal.
+			if (sinal == "verde")
 				atualizaMaiorSequenca(sequenciaAtual);
-				//TODO: #1 CADERNO##################################################
-				sequenciaAtual.add(first);
+
+			// atualiza posicoes de F e N de acordo com o sinal.
+			atualizaVariaveis(sinal);
+
+			// controla pra que todos elementos sejam verificados. Saltos de
+			// 'atualizaVariaveis();' faz com que F pule muitos numeros.
+			if ((N == convertedElementsList.size())) {
+				F = sentinella;
+				N = F + 1;
+				sentinella++;
 			}
-			
-			atualizaVariaveis(deuMatch);
 		}
-		
+
 		return maiorSequencia;
+	}
+
+	private void atualizaSequencia() {
+		if (sequenciaAtual.isEmpty()) {
+			sequenciaAtual.add(first);
+			sequenciaAtual.add(next);
+		} else {
+			sequenciaAtual.add(next);
+		}
+
 	}
 
 	public void atualizaMaiorSequenca(ArrayList<String> sequenciaAtual) {
 		int sizeSequenciaAtual = sequenciaAtual.size();
 		int sizeMaiorSequenciaArmazenada = maiorSequencia.size();
-		
+		// atualiza tamanho sequencia atual quando sinal "Verde!".
+		atualizaSequencia();
 		if (sizeSequenciaAtual > sizeMaiorSequenciaArmazenada) {
 			maiorSequencia = new ArrayList<String>(sequenciaAtual);
-		}		
+		}
 		sequenciaAtual.clear();
 	}
 
-	public void atualizaVariaveis(boolean deuMatch) {
-		if (deuMatch) {
+	public void atualizaVariaveis(String result) {
+		// Se vermelho, troca F e N uma posição adiante. Quando size diferente.
+		// TEORIA: só vai acontecer no inicio.
+		// Se amarelo, troca apenas N uma posição adiante.
+		// Se verde, troca variaveis: onde F recebe N. Onde N recebe N+1.
+		if (result == "amarelo")
+			N++;
+		if (result == "vermelho") {
 			F++;
 			N++;
-		}else{
-			// Supondo que nao faça sentido tendar dar match de numeros já
-			// comparados.
-			// Ex: 12,23,34,45,88. Começando a comparar do '12', tenho
-			// sequencia ate o '45'. Nao fara
-			// sentido começar do 23 e ver os proximos a partir dele pois
-			// seroa os mesmos numeros a comparar
-			// para fazer uma nova sequencia e que será concerteza menor.
-
-			F = N;
-			N = F + 1;
 		}
+		if (result == "verde") {
+			F = N;
+			N = N + 1;
+		}
+
+		// if (deuMatch) {
+		// F++;
+		// N++;
+		// }else{
+		// Supondo que nao faça sentido tendar dar match de numeros já
+		// comparados.
+		// Ex: 12,23,34,45,88. Começando a comparar do '12', tenho
+		// sequencia ate o '45'. Nao fara
+		// sentido começar do 23 e ver os proximos a partir dele pois
+		// seroa os mesmos numeros a comparar
+		// para fazer uma nova sequencia e que será concerteza menor.
+
+		// F = N;
+		// N = N + 1;
+		// }
 	}
-	
+
 	/**
 	 * Compara dois numeros e retorna True se entre eles haver apenas 1 caracter
 	 * diferente na mesma posição.
@@ -215,27 +252,35 @@ public class Util {
 	 *            (String) segundo numero da sequencia a fazer a comparação.
 	 * @return (boolean) resultado to match.
 	 */
-	public boolean match(String first, String next) {
-		boolean result = false;
+	public String match(String first, String next) {
+		// Vou retornar sinais.
+		// Vermelho: Quando size diferente.
+		// Amarelo: quando size igual, mas não deu match. Elemento travado
+		// procurando por um proximo.
+		// Verde: DeuMatch e troca elemento travado para next.
+
+		String sinal = "vermelho";
 		int distictChar = 0;
-		elemSize = first.length();
-		for (int i = 0; i < elemSize && next.length() == elemSize; i++) {
-			// Só pode haver UM caracter diferente em cada numero sendo
-			// comparado.
+		firstSize = first.length();
+		nextSize = next.length();
+		// se size diferente, finaliza metodo e retorna vermelho.
+		for (int i = 0; i < firstSize && firstSize == nextSize; i++) {
+			// se distictChar, soma contador.
 			if (first.charAt(i) != next.charAt(i)) {
-				distictChar++;				
-				// Se qtde de caracteres diferentes for maior que 1, numero nao
-				// pode ser aceito
+				distictChar++;
+				// se contador > 1, finaliza metodo e retorna amarelo.
+				if (distictChar > 1) {
+					sinal = "amarelo";
+					break;
+				}
+				continue;
 			}
-			if (distictChar > 1) {
-				result = false;
-				return result;
-			}
-			else{
-				result = true;
+			// se entrar no else, match funcionando até o momento com sucesso.
+			else {
+				sinal = "verde";
 			}
 		}
-		return result;
+		return sinal;
 	}
 
 	// /**
@@ -289,7 +334,5 @@ public class Util {
 	// }
 	// return encontrou;
 	// }
-
-
 
 }
