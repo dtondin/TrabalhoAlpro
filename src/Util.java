@@ -154,20 +154,10 @@ public class Util
      */
     public ArrayList<String> runTel_Dor(final ArrayList<String> convertedElementsList)
     {
-        // boolean flag = false;
-        // deuMatch = false;
-        // first = convertedElementsList.get(F);
-        // next = convertedElementsList.get(N);
-        // int sentinella = F;
         // TODO: Ainda necessario encontrar forma de separar tamanhos de
         // elementos para poder testar de forma correta.
-        // elemSize = first.length();
-        // TODO: correcao: devo contar as sequencias adicionadas. A maior (size)
-        // vai substituir a menor.
         // TODO: cuidar o caso onde não haverá nenhum match e a lista deverá ser
         // vazia. Fix para esta linha.
-
-        // sequenciaAtual.add(first);
 
         int sentinella = F + 1;
 
@@ -175,8 +165,12 @@ public class Util
         {
             first = convertedElementsList.get(F);
             next = convertedElementsList.get(N);
+            if (first.equals("30332"))
+            {
+                System.out.print("A");
+            }
 
-            sinal = match(first, next);
+            sinal = match();
             // Se vermelho, troca F e N uma posição adiante.
             // Se amarelo, troca apenas N uma posição adiante.
             // Se verde, troca variaveis: onde F recebe N. Onde N recebe N+1.
@@ -249,40 +243,22 @@ public class Util
             F = N;
             N = N + 1;
         }
-
-        // if (deuMatch) {
-        // F++;
-        // N++;
-        // }else{
-        // Supondo que nao faça sentido tendar dar match de numeros já
-        // comparados.
-        // Ex: 12,23,34,45,88. Começando a comparar do '12', tenho
-        // sequencia ate o '45'. Nao fara
-        // sentido começar do 23 e ver os proximos a partir dele pois
-        // seroa os mesmos numeros a comparar
-        // para fazer uma nova sequencia e que será concerteza menor.
-
-        // F = N;
-        // N = N + 1;
-        // }
     }
 
     /**
      * Compara dois numeros e retorna True se entre eles haver apenas 1 caracter diferente na mesma posição.
      * 
-     * @param first (String) primeiro numero da sequencia a fazer a comparação.
-     * @param next (String) segundo numero da sequencia a fazer a comparação.
      * @return (boolean) resultado to match.
      */
-    public String match(final String first, final String next)
+    public String match()
     {
         // Vou retornar sinais.
         // Vermelho: Quando size diferente.
         // Amarelo: quando size igual, mas não deu match. Elemento travado
         // procurando por um proximo.
         // Verde: DeuMatch e troca elemento travado para next.
+        sinal = "vermelho";
 
-        String sinal = "vermelho";
         int distictChar = 0;
         firstSize = first.length();
         nextSize = next.length();
@@ -302,64 +278,8 @@ public class Util
                 continue;
             }
             // se entrar no else, match funcionando até o momento com sucesso.
-            else
-            {
-                sinal = "verde";
-            }
+            sinal = "verde";
         }
         return sinal;
     }
-
-    // /**
-    // *
-    // * @param encontrou
-    // * - boolean flag que informa quando o proximo elemento faz +1
-    // * pela sequencia
-    // * @param elemSize
-    // * - int Tamanho da string (elemento) verificado
-    // * @return
-    // */
-    // public boolean verificaCaracter(boolean encontrou, int elemSize,
-    // String first, String next) {
-    // // TODO: verificar tambem para as proximas posicoes da string (1,2,3)
-    // // TODO: metodo onde posicaoDesejada TROCA somente se lista (sequencia)
-    // // nao aumentar (ou diminuir)
-    // int posicaoDesejada = 1;
-    //
-    // // se sequencia 'casou' ou esta 'casando' ate o momento
-    // if (encontrou == false) {
-    // // vai rodar de acordo com o tamanho da string de entrada sendo
-    // // verificada.
-    // for (int i = 1; i < elemSize; i++) {
-    // // TODO: fazer verificação em todos os caracteres da string de
-    // // entrada e não apenas na primeirra que encontrar.
-    // if (first.charAt(i) == next.charAt(i)) {
-    // posicaoDesejada = first.charAt(i);
-    // encontrou = true;
-    // sequenciaAtual.add(next);
-    // // TODO: verificar se realmente o break faz voltar ao array
-    // // anterior.
-    // return encontrou;
-    // } else {
-    // System.out
-    // .println("\n!!!! Não era pra entrar aqui mas entrou. E agora o que será de nós !!!!!\n");
-    // }
-    // }
-    // } else if (encontrou == true) {
-    // if (first.charAt(posicaoDesejada) == next.charAt(posicaoDesejada)) {
-    // sequenciaAtual.add(next);
-    // // TODO: verificar a necessidade de um break aqui de acordo com
-    // // o caderno
-    // } else {
-    // F++;
-    // encontrou = false;
-    // return encontrou;
-    // }
-    // } else {
-    // encontrou = false;
-    // maiorSequencia.add(sequenciaAtual);
-    // }
-    // return encontrou;
-    // }
-
 }
