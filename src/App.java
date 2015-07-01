@@ -8,7 +8,7 @@ public class App
     private static ArrayList<String> listConvertedElements = new ArrayList<String>();
     private static ArrayList<ArrayList<String>> listTodosArray;
     private static ArrayList<ArrayList> list = new ArrayList<ArrayList>();
-    static String file = "teste5000b";
+    static String file = "arquivos_JB/teste5000b";
 
     public static void main(final String[] args)
     {
