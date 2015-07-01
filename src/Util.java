@@ -1,11 +1,10 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class Util {
 
@@ -47,6 +46,20 @@ public class Util {
 		return stringArrayList;
 	}
 
+//	public String listFilesForFolder(final File folder) {
+//		String saida = null;
+//	    for (final File fileEntry : folder.listFiles()) {
+//	        if (fileEntry.isDirectory()) {
+//	            listFilesForFolder(fileEntry);
+//	        } else {
+//	            //System.out.println(fileEntry.getName());
+//	            saida = fileEntry.getName();
+//	        }
+//	    }
+//	    return saida;
+//	}
+
+
 	/**
 	 * Time counter for the program
 	 * 
@@ -54,17 +67,10 @@ public class Util {
 	 *            - the time stated
 	 * @return - total time spend
 	 */
-	public String timeCounter(final long startTime) {
+	public float timeCounter(final long startTime) {
 		final long endTime = System.currentTimeMillis();
 		final long duration = (endTime - startTime);
-		// System.out.println("\nTime in Milliseconds: " + duration);
-
-		final String timeSpend = String.format(
-				"%d min, %d sec",
-				TimeUnit.MILLISECONDS.toMinutes(duration),
-				TimeUnit.MILLISECONDS.toSeconds(duration)
-						- TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS
-								.toMinutes(duration)));
+		float timeSpend = duration / 1000.0f;;
 		return timeSpend;
 	}
 

@@ -1,4 +1,4 @@
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 
 public class App
@@ -9,30 +9,29 @@ public class App
     private static ArrayList<String> listConvertedElements = new ArrayList<String>();
     private static ArrayList<ArrayList<String>> listTodosArray;
     private static ArrayList<ArrayList> list = new ArrayList<ArrayList>();
+    static String file = "teste5000b";
 
     public static void main(final String[] args)
-            throws IOException
     {
-
     	long startTime = System.currentTimeMillis();
-
-        // Read the elements list
-        u.readAndConvert(listFileElements, listConvertedElements, "teste5000b");
-
-        //listConvertedElements = new ArrayList<String>(u.getStringArrayList());
-
-        //list.add(u.runTel_Dor(listConvertedElements));
+    	
+//    	final File folder = new File("casos_de_teste_JB");
+//    	u.listFilesForFolder(folder);
+    	
+        u.readAndConvert(listFileElements, listConvertedElements, file);
         
         listTodosArray = new ArrayList<ArrayList<String>>(u.getTodosArray());
         
         list.add(u.run(listTodosArray));
 
+        System.out.println("CASO DE TESTE: " + file);
+        System.out.print("\nResultado do caso de teste: ");
+        System.out.println("\nTAMANHO ARQUIVO: " + list.get(0).size());
+        System.out.print("SEQUENCIA: ");
         for (int i = 0; i < list.size(); i++)
         {
             System.out.println(list.get(i));
         }
-
-        // Total time spend on the program in minutes and seconds
-        System.out.println("\nTime Spend: " + u.timeCounter(startTime));
+        System.out.println("\nTEMPO: " + u.timeCounter(startTime) + "s.");
     }
 }
