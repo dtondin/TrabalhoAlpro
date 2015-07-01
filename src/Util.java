@@ -56,7 +56,8 @@ public class Util {
 	public float timeCounter(final long startTime) {
 		final long endTime = System.currentTimeMillis();
 		final long duration = (endTime - startTime);
-		float timeSpend = duration / 1000.0f;;
+		float timeSpend = duration / 1000.0f;
+		;
 		return timeSpend;
 	}
 
@@ -198,15 +199,16 @@ public class Util {
 				&& (sentinella < convertedElementsList.size())) {
 			first = convertedElementsList.get(F);
 			next = convertedElementsList.get(N);
-			
-			status = match();			
+
+			status = match();
 			if (status == "match") {
 				// atualiza sequencia de acodo com o tamanho e sinal.
 				atualizaSequencia();
 			}
 			// atualiza posicoes de F e N de acordo com o sinal.
 			atualizaVariaveis(status);
-			// 'sentinella' controla pra que todos elementos sejam verificados. Saltos de
+			// 'sentinella' controla pra que todos elementos sejam verificados.
+			// Saltos de
 			// 'atualizaVariaveis();' faz com que F pule muitos numeros.
 			if ((N == convertedElementsList.size())) {
 				F = sentinella;
@@ -219,7 +221,7 @@ public class Util {
 	}
 
 	private void atualizaSequencia() {
-		
+
 		if (sequenciaAtual.isEmpty()) {
 			sequenciaAtual.add(first);
 			sequenciaAtual.add(next);
@@ -229,7 +231,7 @@ public class Util {
 	}
 
 	public void atualizaMaiorSequenca() {
-		
+
 		final int sizeSequenciaAtual = sequenciaAtual.size();
 		final int sizeMaiorSequenciaArmazenada = maiorSequencia.size();
 		if (sizeSequenciaAtual > sizeMaiorSequenciaArmazenada) {
@@ -239,23 +241,17 @@ public class Util {
 	}
 
 	public void atualizaVariaveis(final String result) {
-		
+
 		if (result == "procurando") {
 			N++;
-		}else{
+		} else {
 			F = N;
 			N = N + 1;
 		}
 	}
 
-	/**
-	 * Compara dois numeros e retorna True se entre eles haver apenas 1 caracter
-	 * diferente na mesma posição.
-	 * 
-	 * @return (boolean) resultado to match.
-	 */
 	public String match() {
-		
+
 		int distictChar = 0;
 		firstSize = first.length();
 		nextSize = next.length();
@@ -276,7 +272,7 @@ public class Util {
 		return status;
 	}
 
-	public ArrayList<String> run(ArrayList<ArrayList<String>> arrayList) {
+	public ArrayList<String> executa(ArrayList<ArrayList<String>> arrayList) {
 		for (int i = 0; i < arrayList.size(); i++) {
 			F = 0;
 			N = 1;

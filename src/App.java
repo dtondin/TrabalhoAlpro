@@ -18,7 +18,7 @@ public class App
         
         listTodosArray = new ArrayList<ArrayList<String>>(u.getTodosArray());
         
-        list.add(u.run(listTodosArray));
+        list.add(u.executa(listTodosArray));
 
         System.out.println("CASO DE TESTE: " + file);
         System.out.print("\nResultado do caso de teste: ");
