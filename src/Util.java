@@ -30,8 +30,13 @@ public class Util {
 	String next;
 	int firstSize;
 	int nextSize;
+	int nrOperacoes = 0;
 
 	public Util() {
+	}
+	
+	public int getNrOperacoes(){
+		return nrOperacoes;
 	}
 
 	public ArrayList<ArrayList<String>> getTodosArray() {
@@ -197,11 +202,20 @@ public class Util {
 
 		while ((N < convertedElementsList.size())
 				&& (sentinella < convertedElementsList.size())) {
+			//contador de operacoes
+			nrOperacoes++;
 			first = convertedElementsList.get(F);
+			//contador de operacoes
+			nrOperacoes++;
 			next = convertedElementsList.get(N);
+			
+			//contador de operacoes
+			nrOperacoes++;
 
 			status = match();
 			if (status == "match") {
+				//contador de operacoes
+				nrOperacoes++;
 				// atualiza sequencia de acodo com o tamanho e sinal.
 				atualizaSequencia();
 			}
@@ -211,12 +225,22 @@ public class Util {
 			// Saltos de
 			// 'atualizaVariaveis();' faz com que F pule muitos numeros.
 			if ((N == convertedElementsList.size())) {
+				//contador de operacoes
+				nrOperacoes++;
 				F = sentinella;
+				//contador de operacoes
+				nrOperacoes++;
 				N = F + 1;
+				//contador de operacoes
+				nrOperacoes++;
 				sentinella++;
+				//contador de operacoes
+				nrOperacoes++;
 				atualizaMaiorSequenca();
 			}
 		}
+		//contador de operacoes
+		nrOperacoes++;
 		return maiorSequencia;
 	}
 
@@ -224,28 +248,49 @@ public class Util {
 
 		if (sequenciaAtual.isEmpty()) {
 			sequenciaAtual.add(first);
+			//contador de operacoes
+			nrOperacoes++;
 			sequenciaAtual.add(next);
+			//contador de operacoes
+			nrOperacoes++;
 		} else {
 			sequenciaAtual.add(next);
+			//contador de operacoes
+			nrOperacoes++;
 		}
 	}
 
 	public void atualizaMaiorSequenca() {
 
 		final int sizeSequenciaAtual = sequenciaAtual.size();
+		//contador de operacoes
+		nrOperacoes++;
 		final int sizeMaiorSequenciaArmazenada = maiorSequencia.size();
+		//contador de operacoes
+		nrOperacoes++;
 		if (sizeSequenciaAtual > sizeMaiorSequenciaArmazenada) {
 			maiorSequencia = new ArrayList<String>(sequenciaAtual);
+			//contador de operacoes
+			nrOperacoes++;
 		}
+		//contador de operacoes
+		nrOperacoes++;
 		sequenciaAtual.clear();
 	}
 
 	public void atualizaVariaveis(final String result) {
-
+		//contador de operacoes
+		nrOperacoes++;
 		if (result == "procurando") {
+			//contador de operacoes
+			nrOperacoes++;
 			N++;
 		} else {
+			//contador de operacoes
+			nrOperacoes++;
 			F = N;
+			//contador de operacoes
+			nrOperacoes++;
 			N = N + 1;
 		}
 	}
@@ -254,21 +299,33 @@ public class Util {
 
 		int distictChar = 0;
 		firstSize = first.length();
+		//contador de operacoes
+		nrOperacoes++;
 		nextSize = next.length();
-		for (int i = 0; i < firstSize; i++) {
+		//contador de operacoes
+		nrOperacoes++;
+		for (int i = 0; i < firstSize; i++) {			
+			//contador de operacoes
+			nrOperacoes++;			
 			// se caracteres diferentes, soma contador.
 			if (first.charAt(i) != next.charAt(i)) {
 				distictChar++;
 				// se contador > 1, finaliza metodo e retorna 'procurando'.
 				if (distictChar > 1) {
+					//contador de operacoes
+					nrOperacoes++;
 					status = "procurando";
 					break;
 				}
 				continue;
 			}
 			// se sair do if acima, match funcionando até o momento com sucesso.
+			//contador de operacoes
+			nrOperacoes++;
 			status = "match";
 		}
+		//contador de operacoes
+		nrOperacoes++;
 		return status;
 	}
 

@@ -29,5 +29,7 @@ public class App
             System.out.println(list.get(i));
         }
         System.out.println("\nTEMPO: " + u.timeCounter(startTime) + "s.");
+        
+        System.out.println("\nOperações: " + u.getNrOperacoes());
     }
 }
