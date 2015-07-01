@@ -210,10 +210,10 @@ public class Util {
 				&& (sentinella < convertedElementsList.size())) {
 			first = convertedElementsList.get(F);
 			next = convertedElementsList.get(N);
-			// if (first.equals("30332"))
-			// {
-			// System.out.print("A");
-			// }
+
+//			if (first.equals("110322")) {
+//				System.out.print("A");
+//			}
 
 			sinal = match();
 			// Se vermelho, troca F e N uma posição adiante.
@@ -311,6 +311,7 @@ public class Util {
 				}
 				continue;
 			}
+			// se entrar no else, match funcionando até o momento com sucesso.
 			sinal = "verde";
 		}
 		return sinal;
@@ -318,6 +319,8 @@ public class Util {
 
 	public ArrayList<String> run(ArrayList<ArrayList<String>> arrayList) {
 		for (int i = 0; i < arrayList.size(); i++) {
+			F = 0;
+			N = 1;
 			runTel_Dor(arrayList.get(i));
 		}
 		return maiorSequencia;
