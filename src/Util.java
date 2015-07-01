@@ -23,7 +23,7 @@ public class Util {
 	private final ArrayList<String> sequenciaAtual = new ArrayList<String>();
 	public static ArrayList<String> maiorSequencia = new ArrayList<String>();
 	// boolean deuMatch = false;
-	String sinal = null;
+	String status = null;
 	int F = 0; // like a sentinella for First
 	int N = 1; // like a sentinella for Next
 	String first;
@@ -45,20 +45,6 @@ public class Util {
 	public ArrayList<String> getStringArrayList() {
 		return stringArrayList;
 	}
-
-//	public String listFilesForFolder(final File folder) {
-//		String saida = null;
-//	    for (final File fileEntry : folder.listFiles()) {
-//	        if (fileEntry.isDirectory()) {
-//	            listFilesForFolder(fileEntry);
-//	        } else {
-//	            //System.out.println(fileEntry.getName());
-//	            saida = fileEntry.getName();
-//	        }
-//	    }
-//	    return saida;
-//	}
-
 
 	/**
 	 * Time counter for the program
@@ -205,10 +191,6 @@ public class Util {
 	 */
 	public ArrayList<String> runTel_Dor(
 			final ArrayList<String> convertedElementsList) {
-		// TODO: Ainda necessario encontrar forma de separar tamanhos de
-		// elementos para poder testar de forma correta.
-		// TODO: cuidar o caso onde não haverá nenhum match e a lista deverá ser
-		// vazia. Fix para esta linha.
 
 		int sentinella = F + 1;
 
@@ -216,25 +198,15 @@ public class Util {
 				&& (sentinella < convertedElementsList.size())) {
 			first = convertedElementsList.get(F);
 			next = convertedElementsList.get(N);
-
-//			if (first.equals("110322")) {
-//				System.out.print("A");
-//			}
-
-			sinal = match();
-			// Se vermelho, troca F e N uma posição adiante.
-			// Se amarelo, troca apenas N uma posição adiante.
-			// Se verde, troca variaveis: onde F recebe N. Onde N recebe N+1.
-
-			// atualiza sequencia de acodo com o tamanho e sinal.
-			if (sinal == "verde") {
+			
+			status = match();			
+			if (status == "match") {
+				// atualiza sequencia de acodo com o tamanho e sinal.
 				atualizaSequencia();
 			}
-
 			// atualiza posicoes de F e N de acordo com o sinal.
-			atualizaVariaveis(sinal);
-
-			// controla pra que todos elementos sejam verificados. Saltos de
+			atualizaVariaveis(status);
+			// 'sentinella' controla pra que todos elementos sejam verificados. Saltos de
 			// 'atualizaVariaveis();' faz com que F pule muitos numeros.
 			if ((N == convertedElementsList.size())) {
 				F = sentinella;
@@ -243,11 +215,11 @@ public class Util {
 				atualizaMaiorSequenca();
 			}
 		}
-
 		return maiorSequencia;
 	}
 
 	private void atualizaSequencia() {
+		
 		if (sequenciaAtual.isEmpty()) {
 			sequenciaAtual.add(first);
 			sequenciaAtual.add(next);
@@ -257,9 +229,9 @@ public class Util {
 	}
 
 	public void atualizaMaiorSequenca() {
+		
 		final int sizeSequenciaAtual = sequenciaAtual.size();
 		final int sizeMaiorSequenciaArmazenada = maiorSequencia.size();
-		// atualiza tamanho sequencia atual quando sinal "Verde!".
 		if (sizeSequenciaAtual > sizeMaiorSequenciaArmazenada) {
 			maiorSequencia = new ArrayList<String>(sequenciaAtual);
 		}
@@ -267,18 +239,10 @@ public class Util {
 	}
 
 	public void atualizaVariaveis(final String result) {
-		// Se vermelho, troca F e N uma posição adiante. Quando size diferente.
-		// TEORIA: só vai acontecer no inicio.
-		// Se amarelo, troca apenas N uma posição adiante.
-		// Se verde, troca variaveis: onde F recebe N. Onde N recebe N+1.
-		if (result == "amarelo") {
+		
+		if (result == "procurando") {
 			N++;
-		}
-		if (result == "vermelho") {
-			F++;
-			N++;
-		}
-		if (result == "verde") {
+		}else{
 			F = N;
 			N = N + 1;
 		}
@@ -291,36 +255,25 @@ public class Util {
 	 * @return (boolean) resultado to match.
 	 */
 	public String match() {
-
-		// TODO: Ainda necessario encontrar forma de separar tamanhos de
-		// elementos para poder testar de forma correta.
-
-		// Vou retornar sinais.
-		// Vermelho: Quando size diferente.
-		// Amarelo: quando size igual, mas não deu match. Elemento travado
-		// procurando por um proximo.
-		// Verde: DeuMatch e troca elemento travado para next.
-		sinal = "vermelho";
-
+		
 		int distictChar = 0;
 		firstSize = first.length();
 		nextSize = next.length();
-		// se size diferente, finaliza metodo e retorna vermelho.
-		for (int i = 0; (i < firstSize) && (firstSize == nextSize); i++) {
-			// se distictChar, soma contador.
+		for (int i = 0; i < firstSize; i++) {
+			// se caracteres diferentes, soma contador.
 			if (first.charAt(i) != next.charAt(i)) {
 				distictChar++;
-				// se contador > 1, finaliza metodo e retorna amarelo.
+				// se contador > 1, finaliza metodo e retorna 'procurando'.
 				if (distictChar > 1) {
-					sinal = "amarelo";
+					status = "procurando";
 					break;
 				}
 				continue;
 			}
-			// se entrar no else, match funcionando até o momento com sucesso.
-			sinal = "verde";
+			// se sair do if acima, match funcionando até o momento com sucesso.
+			status = "match";
 		}
-		return sinal;
+		return status;
 	}
 
 	public ArrayList<String> run(ArrayList<ArrayList<String>> arrayList) {

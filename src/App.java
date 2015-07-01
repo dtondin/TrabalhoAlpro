@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.ArrayList;
 
 public class App
@@ -14,9 +13,6 @@ public class App
     public static void main(final String[] args)
     {
     	long startTime = System.currentTimeMillis();
-    	
-//    	final File folder = new File("casos_de_teste_JB");
-//    	u.listFilesForFolder(folder);
     	
         u.readAndConvert(listFileElements, listConvertedElements, file);
         
